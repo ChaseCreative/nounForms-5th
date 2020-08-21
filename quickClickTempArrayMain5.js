@@ -1,3 +1,33 @@
+//Timer variables
+//This sets the countdown at 15 sections
+var timeleft = 15;
+var countdown = setInterval(countDownTimer,1000);
+
+function countDownTimer(){
+
+document.getElementById("timer").style.color = "white";
+		document.getElementById("timer").innerHTML = timeleft;
+  		timeleft -= 1;
+  			if(timeleft <= 0)  {
+    			clearInterval(countdown);
+    			document.getElementById("timer").innerHTML = "Time's Up!";
+					document.getElementById("timer").style.color = "black";
+  }
+
+}
+
+//This stops the timer and resets it to 15 seconds
+function stopTimer() {
+
+  clearInterval(countdown);
+  document.getElementById("timer").innerHTML = "Timer";
+timeleft = 15;
+
+}
+
+stopTimer()
+
+
 /*
 Checklist for changing the game:
 0. Change the Tricklation title;
@@ -169,6 +199,9 @@ movLength = 100/20;
 // This function restarts the game at the beginning on the click of the BackBox button.
 function restartGame(){
 
+  document.getElementById("timer").style.color = "white";
+   stopTimer();
+
   //This sets the colors of box 1 for the first game
     document.getElementById("box1").innerHTML = "Start!"
     document.getElementById("box1").style.background = "yellow";
@@ -182,6 +215,7 @@ function restartGame(){
   hideBox2();
   unHideBox1();
   hideBackBox();
+  hideTimer();
 
  //This activitates box 1 to start the Latin to English game
   document.getElementById("box1").onclick = function(){startGame()};
@@ -199,6 +233,14 @@ unHideProgressBar();
 //document.getElementById("myBar").style.width = 0;
 
 function startGame(){
+
+  //timeleft = 15;
+  countdown = setInterval(countDownTimer,1000);
+   //timeleft = 15;
+   //countdown = setInterval(countDownTimer,1000);
+
+unHideBackBox();
+unHideTimer();
 
 
 unHideBackBox();
@@ -241,6 +283,9 @@ document.getElementById("latin").innerHTML = ranVerbLat[verbIndex];
 
 function giveAnswerOne(){
 
+  document.getElementById("timer").style.color = "white";
+  stopTimer();
+
 move();
 
   unHideBox1();
@@ -271,6 +316,14 @@ if (count == 20){
 count++;
 
 //console.log(ranVerbEng.length *2);
+}
+
+function hideTimer(){
+  document.getElementById("timer").style.display = "none" ;
+}
+
+function unHideTimer(){
+  document.getElementById("timer").style.display = "block" ;
 }
 
 
@@ -342,6 +395,7 @@ hideBox2();
 hideDemo();
 hideDemo2();
 hideBackBox();
+hideTimer();
 
 
 function changeBoxColorsTwo(){
